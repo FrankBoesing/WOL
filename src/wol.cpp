@@ -1,3 +1,5 @@
+
+/*
 MIT License
 
 Copyright (c) 2023 Frank Bösing
@@ -19,3 +21,27 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+
+#include "wol.h"
+
+bool sendWOLPacket(const MACAddress pMacAddress, const uint16_t portNum)
+{
+    WiFiUDP udpSock;
+    IPAddress broadcastAddress;
+    const IPAddress _ipAddress = WiFi.localIP();
+    const IPAddress _subnetMask = WiFi.subnetMask();
+    MACAddress magicPacket[17];
+
+    for (int i = 0; i < 4; i++)
+        broadcastAddress[i] = _ipAddress[i] | ~_subnetMask[i];
+
+    udpSock.beginPacket(broadcastAddress, portNum);
+
+    memset(&magicPacket[0], 0xFF, sizeof(MACAddress) );
+    for (int i = 1; i < 17; i++ )
+        memcpy(&magicPacket[i], pMacAddress, sizeof(MACAddress) );
+
+    udpSock.write((uint8_t*)&magicPacket, sizeof magicPacket );
+    return udpSock.endPacket() > 0;
+}

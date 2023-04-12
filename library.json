@@ -1,0 +1,12 @@
+{
+  "name": "WOL",
+  "keywords": "WOL, Wake On Lan, WankeOnLan",
+  "description": "WOL library for ESP",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FrankBoesing/WOL.git"
+  },
+  "version": "1.01",
+  "frameworks": "arduino",
+  "platforms": ["espressif8266", "espressif32"]
+}

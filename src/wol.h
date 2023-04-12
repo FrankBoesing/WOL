@@ -1,3 +1,4 @@
+/*
 MIT License
 
 Copyright (c) 2023 Frank Bösing
@@ -19,3 +20,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+#pragma once
+#include <Arduino.h>
+#include <ESP8266WiFi.h>
+#include <WiFiUdp.h>
+
+typedef uint8_t MACAddress[6];
+bool sendWOLPacket(const MACAddress pMacAddress, const uint16_t portNum = 9);

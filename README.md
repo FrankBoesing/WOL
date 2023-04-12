@@ -1,2 +1,2 @@
 # WOL
-Wanke On Lan for ESP
+Wanke on Lan for ESP
